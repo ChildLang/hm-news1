@@ -5,7 +5,6 @@ import './styles/common.less'
 import './styles/iconfont.less'
 // 按需导入vant组件
 import { Form, Button, Field, Toast, Grid, GridItem, NavBar } from 'vant'
-import 'vant/lib/index.css'
 // 导入根组件
 import App from './App.vue'
 // 导入路由配置文件
