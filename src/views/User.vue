@@ -9,7 +9,8 @@
       </div>
       <div class="nickname">
         <p>
-          <span class="iconfont iconxingbienan"></span>
+          <span class="iconfont iconxingbienan" v-if="info.gender"></span>
+          <span class="iconfont iconxingbienv" v-else></span>
           {{info.nickname}}
         </p>
         <p class="time">{{info.create_date | time}}</p>
@@ -18,11 +19,11 @@
         <span class="iconfont iconjiantou1"></span>
       </div>
     </div>
-    <news-nav>
+    <news-nav @click="$router.push('/follow')">
       <template>我的关注</template>
       <template v-slot:content>关注的用户</template>
     </news-nav>
-    <news-nav>
+    <news-nav @click="$router.push('/comment')">
       <template>我的跟帖</template>
       <template v-slot:content>跟帖/回复</template>
     </news-nav>
@@ -31,6 +32,7 @@
       <template v-slot:content>文章/视频</template>
     </news-nav>
     <news-nav @click="$router.push('/useredit')">设置</news-nav>
+    <news-nav @click="outFn">退出</news-nav>
   </div>
 </template>
 <script>
@@ -46,6 +48,23 @@ export default {
     const { statusCode, data } = res.data
     if (statusCode === 200) {
       this.info = data
+    }
+  },
+  methods: {
+    async outFn() {
+      console.log(123)
+      try {
+        await this.$dialog.confirm({
+          title: '提示',
+          message: '是否退出'
+        })
+        localStorage.removeItem('id')
+        localStorage.removeItem('token')
+        this.$router.push('/login')
+        this.$toast.success('退出成功')
+      } catch {
+        this.$toast('取消')
+      }
     }
   }
 }
@@ -76,6 +95,12 @@ export default {
         margin-top: 5px;
       }
     }
+  }
+  .iconxingbienan {
+    color: cadetblue;
+  }
+  .iconxingbienv {
+    color: chocolate;
   }
 }
 </style>

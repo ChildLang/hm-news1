@@ -4,7 +4,22 @@ import 'amfe-flexible'
 import './styles/common.less'
 import './styles/iconfont.less'
 // 按需导入vant组件
-import { Form, Button, Field, Toast, Grid, GridItem, NavBar } from 'vant'
+import {
+  Form,
+  Button,
+  Field,
+  Toast,
+  Grid,
+  GridItem,
+  NavBar,
+  Dialog,
+  Uploader,
+  RadioGroup,
+  Radio,
+  Cell,
+  CellGroup
+} from 'vant'
+
 // 导入根组件
 import App from './App.vue'
 // 导入路由配置文件
@@ -38,6 +53,14 @@ axios.interceptors.response.use(function(res) {
   }
   return res
 })
+// 配置图片地址
+Vue.prototype.$url = function(url) {
+  if (url.startsWith('http')) {
+    return url
+  } else {
+    return axios.defaults.baseURL + url
+  }
+}
 // 配置过滤器
 Vue.filter('time', function(input) {
   return moment(input).format('YYYY-MM-DD')
@@ -50,6 +73,12 @@ Vue.use(Toast)
 Vue.use(Grid)
 Vue.use(GridItem)
 Vue.use(NavBar)
+Vue.use(Dialog)
+Vue.use(Uploader)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Cell)
+Vue.use(CellGroup)
 
 // 注册通用组件
 Vue.component('news-logo', NewLogo)

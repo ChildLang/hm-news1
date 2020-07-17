@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar" @click="$emit('click')">
+  <div class="navbar" @click="jump">
     <div class="name">
       <slot></slot>
     </div>
@@ -12,6 +12,13 @@
   </div>
 </template>
 <script>
+export default {
+  methods: {
+    jump() {
+      this.$emit('click')
+    }
+  }
+}
 </script>
 <style lang='less' scoped>
 .navbar {
